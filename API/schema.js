@@ -148,6 +148,13 @@ const typeDefs = gql`
     senderEmail: String!
     receiverEmail: String!
   }
+  
+  input SaveRecipeInput {
+    username: String!
+    name: String
+    ingredients: String
+    recipe: String
+  }
 
   type Query { #the query can be of any name but the input type and return types are usually defined in the schema
     usertestID(userID: String!): User! #a query which can be used to get user details based on user id
@@ -180,6 +187,9 @@ const typeDefs = gql`
     
     #getLoggedInUsername(testInput: String): String #a query which can be used to get the username of the logged in user
     getLoggedInUsername(input: String): String
+    
+    saveRecipe(input: SaveRecipeInput): String
+
 
   }
 `;
