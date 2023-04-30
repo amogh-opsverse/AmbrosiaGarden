@@ -37,23 +37,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
   //const [searchUsers, searchedUsers] = useMutation(SEARCH_USER);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<any>(false);
 
-  const handleSearchSubmit = async (e: any) => {
-    e.preventDefault();
-    dispatch(setActiveSearch("redux")); //dispatch the search results to redux store
-    // Implement your logic to search for roommate profiles using the Elasticsearch service
-    const input = {
-      query: searchQuery,
-    };
-
-    let searchedUsers1 = await searchUsers({
-      variables: { input }, //the input has to match the input schema type defined in backend
-    });
-
-    console.log("response from elastic search", searchedUsers1);
-    dispatch(setSearchResults(searchedUsers1.data.elasticSearch)); //dispatch the search results to redux store
-    //dispatch the search results to redux store
-  };
-
+  
   const handleSignOut = async (e: any) => {
     e.preventDefault();
     //dispatch(setChatbotStatus("inactive")); //dispatch the search results to redux store
@@ -90,7 +74,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
             {/* Search bar */}
             <form
               className="w-full md:w-auto mx-auto flex items-center"
-              onSubmit={handleSearchSubmit}
+             // onSubmit={handleSearchSubmit}
             >
               <input
                 type="search"
@@ -168,7 +152,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
         >
           <form
             className="w-full mx-auto mb-4 flex items-center"
-            onSubmit={handleSearchSubmit}
+           // onSubmit={handleSearchSubmit}
           >
             <input
               type="search"
