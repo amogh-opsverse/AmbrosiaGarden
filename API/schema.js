@@ -151,7 +151,6 @@ const typeDefs = gql`
 
   type Query { #the query can be of any name but the input type and return types are usually defined in the schema
     usertestID(userID: String!): User! #a query which can be used to get user details based on user id
-    getLoggedInUsername(testInput: String): String #a query which can be used to get the username of the logged in user
   }
 
   type Mutation {
@@ -178,6 +177,9 @@ const typeDefs = gql`
 
     #courier api
     contactUser(input: ContactUser): String
+    
+    getLoggedInUsername(testInput: String): String #a query which can be used to get the username of the logged in user
+
   }
 `;
 
