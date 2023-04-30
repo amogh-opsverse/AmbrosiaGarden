@@ -1,6 +1,6 @@
 # Ambrosia: A Sustainable Social Garden 
 
-Ambrosia is a web application built using the MERN stack, designed to help users find compatible roommates based on their preferences and lifestyle choices. This application is mobile-browser friendly and provides a seamless user experience.
+Ambrosia is a web application built using the MERN stack, designed to help users find compatible friends based on their cuisine preferences and sustainable fusion recipe choices. This application is mobile-browser friendly and provides a seamless user experience.
 
 ## Deployment
 have two separate terminal tabs open for frontend and API directories respectively and run the following commands in the root of both directories, if it's your first time deploying the app.
