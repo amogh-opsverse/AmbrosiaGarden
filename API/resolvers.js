@@ -214,6 +214,46 @@ module.exports = {
       console.log("loggedinusername resolver accessed");
       return username;
     },
+    
+     //stores the recipe in elasticsearch but also generates an image for the dish
+    saveRecipe: async (_, { input }, { models }) => {
+      const username = input.username;
+      const dishName = input.name;
+      const dishIngredients = input.ingredients;
+      const dishRecipe = input.recipe;
+
+      //store in elastic search
+      const newRecipe = {
+        name: dishName,
+        ingredients: dishIngredients,
+        recipe: dishRecipe,
+      };
+
+      //store the new user profile in the elastic-search index
+      let newRecipeId = uuidv4(); //randomly generate uuidv4
+      indexAmbrosiaProfile(newRecipeId, newRecipe);
+
+      //store in mongoDB
+      const updatedUser = await models.User.findOneAndUpdate(
+        { username: username },
+        {
+          $push: {
+            savedRecipes: {
+              name: dishName,
+              ingredients: dishIngredients,
+              recipe: dishRecipe,
+            },
+          },
+        },
+        { new: true } // Return the updated user document
+      );
+
+      if (!updatedUser) {
+        throw new Error("User not found");
+      }
+
+      return "recipe saved";
+    },
     searchUsers: async (_, { input, skip = 0, limit = 100 }, { models }) => {
       const filterAttributes = [
         input.university ? { university: input.university } : null,
