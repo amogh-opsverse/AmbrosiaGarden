@@ -178,7 +178,8 @@ const typeDefs = gql`
     #courier api
     contactUser(input: ContactUser): String
     
-    getLoggedInUsername(testInput: String): String #a query which can be used to get the username of the logged in user
+    #getLoggedInUsername(testInput: String): String #a query which can be used to get the username of the logged in user
+    getLoggedInUsername: String
 
   }
 `;
