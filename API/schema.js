@@ -29,7 +29,7 @@ const typeDefs = gql`
 
   type SavedRecipe {
     imgUrl: String
-    recipe: String
+    name: String
   }
 
   type ProfileInfo {
@@ -122,7 +122,7 @@ const typeDefs = gql`
     prompt: String
   }
 
-  input GetUserDesigns {
+  input GetUserRecipes {
     username: String!
   }
 
@@ -172,7 +172,7 @@ const typeDefs = gql`
     getUserPrivacy(input: CollectionPrivacy): Boolean
 
     #dall-e generation
-    getUserDesigns(input: GetUserDesigns): [SavedRecipe]
+    getUserRecipes(input: GetUserRecipes): [SavedRecipe]
     createDesigns(input: GenerateDesigns): [String]
     deleteDesign(input: DeleteDesign): String
     saveUserDesign(input: SaveDesign): String
