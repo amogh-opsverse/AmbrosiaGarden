@@ -29,19 +29,7 @@ import { useMutation } from "@apollo/react-hooks";
 import DALLEImageView from "./GPT";
 import { useSelector } from "react-redux";
 
-declare global {
-  interface Window {
-    voiceflow: {
-      chat: {
-        load: (options: {
-          verify: { projectID: string };
-          url: string;
-          versionID: string;
-        }) => void;
-      };
-    };
-  }
-}
+
 interface User {
   username: string;
   name: string;
@@ -129,28 +117,6 @@ const Home = () => {
   const university = signedUser["data"]["userLogin"].university;
   const username = signedUser["data"]["userLogin"].username;
   const email = signedUser["data"]["userLogin"].email;
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.async = true;
-
-    script.onload = function () {
-      window.voiceflow.chat.load({
-        verify: { projectID: "644ac896a04f80000732784f" },
-        url: "https://general-runtime.voiceflow.com",
-        versionID: "production",
-      });
-    };
-
-    script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
-   // if (chatbotStatus === "active") document.body.appendChild(script);
-
-    // Clean up the script when the component is unmounted
-     return () => {
-       document.body.removeChild(script);
-     };
-  }, []);
 
   const handleSearchAttributesChange = async (attributes: any) => {
     setSearchLoading(true);
