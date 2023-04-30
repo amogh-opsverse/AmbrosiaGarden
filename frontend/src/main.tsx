@@ -13,28 +13,7 @@ import Home from "./components/Home";
 import Layout from "./components/Layout";
 import HomePageNav from "./components/HomeNav";
 import About from "./components/About";
-// const App = loadable(() => import("./App"), { fallback: <Loading /> });
-// const ProfileInfo = loadable(() => import("./components/ProfileInfo"), {
-//   fallback: <Loading />,
-// });
-// const RegistrationForm = loadable(() => import("./components/SignUp"), {
-//   fallback: <Loading />,
-// });
-// const LoginForm = loadable(() => import("./components/Login"), {
-//   fallback: <Loading />,
-// });
-// const Home = loadable(() => import("./components/Home"), {
-//   fallback: <Loading />,
-// });
-// const Layout = loadable(() => import("./components/Layout"), {
-//   fallback: <Loading />,
-// });
-// const HomePageNav = loadable(() => import("./components/HomeNav"), {
-//   fallback: <Loading />,
-// });
-// const About = loadable(() => import("./components/About"), {
-//   fallback: <Loading />,
-// });
+
 
 import client from "./apollo-client";
 import { BrowserRouter, Routes } from "react-router-dom";
