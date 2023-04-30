@@ -284,8 +284,8 @@ module.exports = {
         }
       }
 
-      const detailedPrompt = await generateDetailedPrompt(dishName);
-      console.log("detailed davinci prompt: ", detailedPrompt);
+     // const detailedPrompt = await generateDetailedPrompt(dishName);
+     // console.log("detailed davinci prompt: ", detailedPrompt);
       const urls = await fetchGeneratedImages(dishName);
 
       console.log("generated image urls: ", urls);
@@ -325,7 +325,7 @@ module.exports = {
             savedRecipes: {
               name: dishName,
               imgUrl: imageUrl,
-              recipe: detailedPrompt,
+              //recipe: detailedPrompt,
             },
           },
         },
