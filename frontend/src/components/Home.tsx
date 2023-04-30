@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect, useRef } from "react";
 import SearchFilter from "./SearchFilter";
 import { useLocation } from "react-router-dom";
