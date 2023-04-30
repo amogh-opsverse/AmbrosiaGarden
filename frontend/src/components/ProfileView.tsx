@@ -156,7 +156,7 @@ const ProfileView: React.FC<RecommendationsResultsProps> = ({
     image: loggedInUser["data"]["userLogin"].imgUrl,
     university: loggedInUser["data"]["userLogin"].university,
     major: loggedInUser["data"]["userLogin"].major,
-    favCuisines: loggedInUser["data"]["userLogin"].favCuisines,
+    //favCuisines: loggedInUser["data"]["userLogin"].favCuisines,
   });
 
   const cuisineOptions: CuisineOption[] = [
