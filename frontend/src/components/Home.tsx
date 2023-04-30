@@ -146,9 +146,9 @@ const Home = () => {
     if (chatbotStatus === "active") document.body.appendChild(script);
 
     // Clean up the script when the component is unmounted
-    // return () => {
-    //   document.body.removeChild(script);
-    // };
+     return () => {
+       document.body.removeChild(script);
+     };
   }, []);
 
   const handleSearchAttributesChange = async (attributes: any) => {
