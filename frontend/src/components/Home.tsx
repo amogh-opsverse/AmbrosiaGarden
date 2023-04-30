@@ -64,10 +64,6 @@ const USER_DETAILS = gql`
     bio
     email
     imgUrl
-    savedRecipes {
-      imgUrl
-      name
-    }
     personality
     major
     university
@@ -88,7 +84,6 @@ const Home = () => {
   const [visible, setVisible] = useState(false);
   const [searchLoading, setSearchLoading] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showChatbot, setShowChatbot] = useState(false);
 
   useEffect(() => {
     // Set the component to visible after a delay
@@ -100,22 +95,13 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // useEffect(() => {
-  //   setShowChatbot(true);
-  //   return () => {
-  //     setShowChatbot(false);
-  //   };
-  // }, []);
+ 
 
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [backgroundSelection, setBackgroundSelection] = useState("outdoor");
 
 
-  // Define your background images for each category and mode
-  // const indoorBackgrounds = {
-  //   light: lightBackgroundPicIndoor,
-  //   dark: darkBackgroundPicIndoor,
-  // };
+ 
 
   const outdoorBackgrounds = {
     light: lightBackgroundPicOutdoor,
@@ -143,8 +129,6 @@ const Home = () => {
   const username = signedUser["data"]["userLogin"].username;
   const email = signedUser["data"]["userLogin"].email;
 
-  let chatbotStatus = useSelector((state: any) => state.searchResults.chatbot);
-  //const logg
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "text/javascript";
@@ -165,7 +149,7 @@ const Home = () => {
     // return () => {
     //   document.body.removeChild(script);
     // };
-  }, [chatbotStatus]);
+  }, []);
 
   const handleSearchAttributesChange = async (attributes: any) => {
     setSearchLoading(true);
