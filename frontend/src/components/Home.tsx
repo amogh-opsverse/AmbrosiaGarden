@@ -72,7 +72,7 @@ const USER_DETAILS = gql`
     imgUrl
     savedRecipes {
       imgUrl
-      recipe
+      name
     }
     personality
     major
