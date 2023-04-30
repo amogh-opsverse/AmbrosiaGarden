@@ -336,6 +336,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
   }
 
   return (
+  <>
   <div
     className="dalle-image-view overflow-y-auto"
     style={{
@@ -475,29 +476,8 @@ const DALLEImageView: React.FC<DallEProps> = ({
         ))}
       </div>
     </div>
-    <>
-      <div>
-        <button
-          onClick={() => {
-            refetchCollection();
-            setIsViewingCollection(!isViewingCollection);
-          }}
-          className="opacity-60 view-collection-button mb-2"
-          style={{
-            backgroundColor: "blue",
-            color: "white",
-            border: "none",
-            padding: "8px 16px",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-        </button>
-      </div>
-
-     
-    </>
   </div>
+    </>
 );
 
 export default DALLEImageView;
