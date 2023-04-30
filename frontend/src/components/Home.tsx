@@ -143,7 +143,7 @@ const Home = () => {
     };
 
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
-    if (chatbotStatus === "active") document.body.appendChild(script);
+   // if (chatbotStatus === "active") document.body.appendChild(script);
 
     // Clean up the script when the component is unmounted
      return () => {
