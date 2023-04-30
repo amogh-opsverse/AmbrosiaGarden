@@ -29,7 +29,9 @@ const UserSchema = new mongoose.Schema({
   savedRecipes: [
     {
       imgUrl: String,
-      recipeLink: String,
+      name: String,
+      ingredients: String,
+      recipe: String,
     },
   ],
   collectionPublic: Boolean,
