@@ -15,7 +15,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import {
   setSearchResults,
   setActiveSearch,
-  setChatbotStatus,
+
 } from "../redux/actions/searchActions";
 import { useDispatch } from "react-redux";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -25,38 +25,8 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const ELASTICUSER_DETAILS = gql`
-  fragment ElasticUserDetails on User {
-    username
-    name
-    bio
-    email
-    hygiene
-    personality
-    university
-    gender
-    major
-    sleepTime
-    smoke
-    pets
-    similarity
-    imgUrl
-    hobbies
-    savedImages {
-      imgUrl
-      prompt
-    }
-  }
-`;
 
-const SEARCH_USER = gql`
-  mutation SearchUser($input: UserElasticSearch) {
-    elasticSearch(input: $input) {
-      ...ElasticUserDetails
-    }
-  }
-  ${ELASTICUSER_DETAILS}
-`;
+
 
 const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
   const dispatch = useDispatch(); //redux dispatch
@@ -64,7 +34,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
 
   // Add this inside HomePageNav functional component
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchUsers, searchedUsers] = useMutation(SEARCH_USER);
+  //const [searchUsers, searchedUsers] = useMutation(SEARCH_USER);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<any>(false);
 
   const handleSearchSubmit = async (e: any) => {
@@ -86,7 +56,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
 
   const handleSignOut = async (e: any) => {
     e.preventDefault();
-    dispatch(setChatbotStatus("inactive")); //dispatch the search results to redux store
+    //dispatch(setChatbotStatus("inactive")); //dispatch the search results to redux store
     //window.location.href = "/";
     navigate("/");
     // Navigate to the root route
@@ -168,15 +138,15 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
 
           <div className="flex-shrink-0">
             {/* Sign out icon */}
-            <button
-              //to="/"
+            <Link
+              to="/"
               className="text-lg font-semibold text-white hover:text-blue-600"
-              onClick={handleSignOut}
+              //onClick={handleSignOut}
             >
               <div>
                 <FontAwesomeIcon icon={faSignOutAlt} size="2x" />
               </div>
-            </button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
