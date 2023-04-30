@@ -37,7 +37,7 @@ const USER_DETAILS = gql`
 const RECIPE_DETAILS = gql`
   fragment RecipeDetails on SavedRecipe {
     imgUrl
-    recipe
+    name
   }
 `;
 
@@ -61,8 +61,8 @@ const DELETE_IMAGE = gql`
 `;
 
 const GET_RECIPES = gql`
-  mutation GetRecipes($input: GetUserDesigns) {
-    getUserDesigns(input: $input) {
+  mutation GetRecipes($input: GetUserRecipes) {
+    getUserRecipes(input: $input) {
       ...RecipeDetails
     }
   }
@@ -104,7 +104,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
   const [generateImages, generatedImages] = useMutation(GENERATE_IMAGES);
   const [updateUserPrivacy, updatedUserPrivacy] = useMutation(UPDATE_PRIVACY);
   const [getUserPrivacy, userPrivacy] = useMutation(GET_PRIVACY);
-  const [getRecipes, userDesigns] = useMutation(GET_RECIPES);
+  const [getRecipes, userRecipes] = useMutation(GET_RECIPES);
   const [saveImage, savedImage] = useMutation(SAVE_IMAGE);
   const [deleteImage, deletedImage] = useMutation(DELETE_IMAGE);
   const [isViewingCollection, setIsViewingCollection] = useState(false);
@@ -253,7 +253,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
 
         //setting the initial privacy state to the one stored in the db
 
-        const verifiedURLArr = await checkImage(collection.data.getUserDesigns);
+        const verifiedURLArr = await checkImage(collection.data.getUserRecipes);
         setCollectionURLs(verifiedURLArr);
         setSearchLoading(false);
       } catch (error) {
@@ -520,7 +520,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
                       textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Text shadow
                     }}
                   >
-                    &ldquo;{url.prompt}&rdquo;
+                    &ldquo;{url.name}&rdquo;
                   </div>
                 </div>
               ))}
