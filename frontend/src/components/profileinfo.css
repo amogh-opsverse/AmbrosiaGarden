@@ -1,0 +1,19 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+/* .select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.select-container select {
+  width: 50%; 
+  text-align: center;
+  text-align-last: center;
+} */
+
+.disable-scroll {
+  overflow: hidden;
+}
