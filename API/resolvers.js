@@ -209,19 +209,24 @@ module.exports = {
         return "username available";
       }
     },
-     getLoggedInUsername: async (_, { input }, { models }) => {
-      //retrieving the loggedInUsername stored in redis
-        redisClient.get("loggedInUser", (error, username) => {
-        if (error) {
-          console.error("Error retrieving username from Redis:", error);
-        } else if (username) {
-          console.log("Username retrieved from Redis:", username);
-          return username;
-        } else {
-          console.log("No username found in Redis");
-        }
-      });
-    },
+    getLoggedInUsername: async (_, { input }, { models }) => {
+  // Wrap the redisClient.get() call inside a Promise
+  return new Promise((resolve, reject) => {
+    redisClient.get("loggedInUser", (error, username) => {
+      if (error) {
+        console.error("Error retrieving username from Redis:", error);
+        reject(error); // Reject the Promise with the error
+      } else if (username) {
+        console.log("Username retrieved from Redis:", username);
+        resolve(username); // Resolve the Promise with the username
+      } else {
+        console.log("No username found in Redis");
+        resolve(null); // Resolve the Promise with null
+      }
+    });
+  });
+},
+
     searchUsers: async (_, { input, skip = 0, limit = 100 }, { models }) => {
       const filterAttributes = [
         input.university ? { university: input.university } : null,
