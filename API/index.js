@@ -41,9 +41,14 @@ const startServer = async () => {
 
   //app.use(express.json());
   app.use(express.json({ limit: "50mb" }));
-  app.use(
+   app.use(
     cors({
       origin: "*",
+      credentials: true,
+      methods: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+      allowedHeaders: "X-CSRF-Token,X-Requested-With,Accept,Accept-Version,Content-Length,Content-MD5,Content-Type,Date,X-Api-Version",
+      preflightContinue: true,
+      maxAge: 999999999
     })
   );
 
