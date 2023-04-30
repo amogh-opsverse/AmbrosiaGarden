@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChirayuRai/CPP_ITC_Comp_2023.git"
+    "url": "git+https://github.com/amogh-opsverse/AmbrosiaGarden.git"
   },
-  "author": "",
+  "author": "Amogh Prakash",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ChirayuRai/CPP_ITC_Comp_2023/issues"
+    "url": "https://github.com/amogh-opsverse/AmbrosiaGarden/issues"
   },
-  "homepage": "https://github.com/ChirayuRai/CPP_ITC_Comp_2023#readme",
+  "homepage": "https://github.com/amogh-opsverse/AmbrosiaGarden#readme",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
     "@elastic/elasticsearch": "^8.6.0",
