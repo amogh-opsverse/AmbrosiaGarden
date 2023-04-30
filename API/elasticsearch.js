@@ -4,9 +4,9 @@ const nodeVal = process.env.ELASTIC_NODE;
 const apiVal = process.env.ELASTIC_API_KEY;
 
 const client = new Client({
-  node: "https://ff41039b808e46b2a83c50d6e32a05ff.us-central1.gcp.cloud.es.io:443",
+  node: nodeVal,
   auth: {
-    apiKey: "aUE4S3pvY0JfREMwbW1mcEFhYVI6UmpvdzhGYldRSzJZX1A3aEp5QWQxZw==",
+    apiKey: apiVal,
   },
 });
 
