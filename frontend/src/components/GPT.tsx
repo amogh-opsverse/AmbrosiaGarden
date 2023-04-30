@@ -335,8 +335,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
     window.open(squooshUrl, "_blank");
   }
 
-  return (
-  <>
+ return (
   <div
     className="dalle-image-view overflow-y-auto"
     style={{
@@ -445,39 +444,38 @@ const DALLEImageView: React.FC<DallEProps> = ({
                 title={"Save to collection"}
               />
               <AiOutlinePicture
-                className="squoosh-icon absolute"
-                size={34}
-                onClick={() =>
-                  openWithSquoosh(url.imgUrl, "squoosh-dalle.png")
-                }
-                style={{
-                  top: "10px",
-                  left: "50%",
-                  transform: "translateX(-90%)",
-                  cursor: "pointer",
-                }}
-                title={"Open with squoosh"}
-              />
-              <img src={url.imgUrl} className="rounded-lg" />
-            </div>
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "8px",
-                fontStyle: "italic",
-                fontSize: "14px",
-                color: "#E4E1D0", // Bone white color
-                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Text shadow
-              }}
-            >
-              &ldquo;{url.name}&rdquo;
-            </div>
-          </div>
-        ))}
+            className="squoosh-icon absolute"
+            size={34}
+            onClick={() =>
+              openWithSquoosh(url.imgUrl, "squoosh-dalle.png")
+            }
+            style={{
+              top: "10px",
+              left: "50%",
+              transform: "translateX(-90%)",
+              cursor: "pointer",
+            }}
+            title={"Open with squoosh"}
+          />
+          <img src={url.imgUrl} className="rounded-lg" />
+        </div>
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "8px",
+            fontStyle: "italic",
+            fontSize: "14px",
+            color: "#E4E1D0", // Bone white color
+            textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Text shadow
+          }}
+        >
+          &ldquo;{url.name}&rdquo;
+        </div>
       </div>
-    </div>
+    ))}
   </div>
-    </>
+</div>
+  </div>
 );
 
 export default DALLEImageView;
