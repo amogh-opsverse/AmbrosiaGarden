@@ -152,8 +152,6 @@ const typeDefs = gql`
   input SaveRecipeInput {
     username: String!
     name: String
-    ingredients: String
-    recipe: String
   }
 
   type Query { #the query can be of any name but the input type and return types are usually defined in the schema
