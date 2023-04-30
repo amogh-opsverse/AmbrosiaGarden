@@ -887,32 +887,21 @@ module.exports = {
       return "Deleted image";
     },
 
-    getUserDesigns: async (_, { input }, { models }) => {
+    getUserRecipes: async (_, { input }, { models }) => {
       const { username } = input;
       const filter = { username };
-      const cacheKey = `userDesigns:${username}`;
-
-      try {
-        // Try to get data from Redis cache
-        const cachedData = await redisClient.get(cacheKey);
-
-        if (cachedData) {
-          console.log("Returning data from Redis cache");
-          return JSON.parse(cachedData);
-        }
-
+      
         const user = await models.User.findOne(filter);
         if (!user) {
           throw new Error("User not found");
         }
 
-        const savedImages = user.savedImages;
-        console.log("User saved images:", savedImages);
+        const savedRecipes = user.savedRecipes;
+        console.log("User saved images:", savedRecipes);
 
         // Cache the data in Redis with an expiration time (e.g., 3600 seconds = 1 hour)
-        await redisClient.setex(cacheKey, 3600, JSON.stringify(savedImages));
 
-        return savedImages;
+        return savedRecipes;
       } catch (error) {
         console.error("Error fetching user designs:", error);
         throw error;
