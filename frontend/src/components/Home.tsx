@@ -1,16 +1,4 @@
-declare global {
-  interface Window {
-    voiceflow: {
-      chat: {
-        load: (options: {
-          verify: { projectID: string };
-          url: string;
-          versionID: string;
-        }) => void;
-      };
-    };
-  }
-}
+
 
 import { useState, useEffect, useRef } from "react";
 import SearchFilter from "./SearchFilter";
@@ -41,6 +29,19 @@ import { useMutation } from "@apollo/react-hooks";
 import DALLEImageView from "./GPT";
 import { useSelector } from "react-redux";
 
+declare global {
+  interface Window {
+    voiceflow: {
+      chat: {
+        load: (options: {
+          verify: { projectID: string };
+          url: string;
+          versionID: string;
+        }) => void;
+      };
+    };
+  }
+}
 interface User {
   username: string;
   name: string;
