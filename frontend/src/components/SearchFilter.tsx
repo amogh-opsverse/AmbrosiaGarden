@@ -21,14 +21,9 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
   // const [searchTerm, setSearchTerm] = useState("");
 
   const [filterAttributes, setFilterAttributes] = useState({
-    Hygiene: "",
-    Pets: "",
-    Smoking: "",
-    Guests: "",
-    SleepTime: "",
     Personality: "",
+    Diet: false,
     University: false,
-    Gender: false,
   });
 
   const [collapsed, setCollapsed] = useState(true);
@@ -112,7 +107,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
               </div>
               <div className="w-1/2 pr-8">
                 <label
-                  htmlFor="gender"
+                  htmlFor="diet"
                   className="font-semibold mb-2 text-white"
                   style={{
                     fontFamily: "Roboto, sans-serif",
@@ -126,10 +121,10 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
                 </label>
                 <input
                   type="checkbox"
-                  checked={filterAttributes.Gender}
+                  checked={filterAttributes.Diet}
                   onChange={handleCheckboxAttributeChange}
-                  id="gender"
-                  name="Gender"
+                  id="diet"
+                  name="Diet"
                   className="ml-2 align-middle"
                 />
               </div>
