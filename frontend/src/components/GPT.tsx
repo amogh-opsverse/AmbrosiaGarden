@@ -476,6 +476,6 @@ const DALLEImageView: React.FC<DallEProps> = ({
   </div>
 </div>
   </div>
-);
+)};
 
 export default DALLEImageView;
