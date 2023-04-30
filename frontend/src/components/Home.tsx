@@ -55,12 +55,6 @@ interface User {
   profilePublic: boolean;
 }
 
-const IMAGE_DETAILS = gql`
-  fragment ImageDetails on SavedImage {
-    imgUrl
-    prompt
-  }
-`;
 //gql mutation query for the list of users based on the search query
 //update this to include other
 const USER_DETAILS = gql`
@@ -77,8 +71,6 @@ const USER_DETAILS = gql`
     personality
     major
     university
-    collectionPublic
-    profilePublic
   }
 `;
 
