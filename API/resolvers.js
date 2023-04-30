@@ -211,7 +211,7 @@ module.exports = {
     },
      getLoggedInUsername: async (_, { input }, { models }) => {
       //retrieving the loggedInUsername stored in redis
-      await redisClient.get("loggedInUser", (error, username) => {
+        redisClient.get("loggedInUser", (error, username) => {
         if (error) {
           console.error("Error retrieving username from Redis:", error);
         } else if (username) {
