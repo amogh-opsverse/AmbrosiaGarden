@@ -210,20 +210,9 @@ module.exports = {
       }
     },
      getLoggedInUsername: async (_, __, { models }) => {
-      return new Promise((resolve, reject) => {
-        redisClient.get("loggedInUser", (error, username) => {
-          if (error) {
-            console.error("Error retrieving username from Redis:", error);
-            reject(error);
-          } else if (username) {
-            console.log("Username retrieved from Redis:", username);
-            resolve(username);
-          } else {
-            console.log("No username found in Redis");
-            resolve(null);
-          }
-        });
-      });
+      const username = await redisClient.get("loggedInUser");
+      console.log("loggedinusername resolver accessed");
+      return username;
     },
     searchUsers: async (_, { input, skip = 0, limit = 100 }, { models }) => {
       const filterAttributes = [
