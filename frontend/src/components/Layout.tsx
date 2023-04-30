@@ -30,7 +30,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 //   WebkitTextStroke: "1px #2563EB", // Adjust the stroke width and color as needed
                 // }}
               >
-                Ambrosia Garden
+                Ambrosia
               </h1>
             </Link>
           </div>
