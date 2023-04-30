@@ -290,7 +290,7 @@ module.exports = {
 
       console.log("generated image urls: ", urls);
 
-      const response = await axios.get(url, {
+      const response = await axios.get(urls[0], {
         responseType: "arraybuffer",
       });
       const buffer = Buffer.from(response.data, "binary");
