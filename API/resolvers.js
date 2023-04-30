@@ -219,14 +219,98 @@ module.exports = {
     saveRecipe: async (_, { input }, { models }) => {
       const username = input.username;
       const dishName = input.name;
-      const dishIngredients = input.ingredients;
-      const dishRecipe = input.recipe;
+      // const dishIngredients = input.ingredients;
+      // const dishRecipe = input.recipe;
+
+      //using the name generate a description for the dish using davinci api
+      async function generateDetailedPrompt(userPrompt) {
+        try {
+          const response = await axios.post(
+            "https://api.openai.com/v1/engines/text-davinci-002/completions",
+            JSON.stringify({
+              //prompt: `Given the user's input: "${userPrompt}", create a detailed description including the words photorealistic and high-quality for the interior design of a living space in a true-to-life manner.`,
+              prompt: ` You are a world class master chef at fusion cuisine. Given the user's input: "${userPrompt}", give the recipe for preparing the dish.`,
+              //The description should capture the essence of the theme, include essential elements, and describe the atmosphere, furniture, decorations, color scheme, and other aspects of the room in a true-to-life manner.`,
+              max_tokens: 1024, // Increase max tokens if necessary
+              n: 1, // Generate multiple responses
+              stop: null, // Stop when encountering a newline character
+              //temperature: 0.6, // Adjust the temperature for more diverse outputs
+              top_p: 0.7, // Use top_p instead of temperature for more focused outputs
+              echo: false, // Do not include the input prompt in the response
+            }),
+            {
+              headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                Authorization: `Bearer ${apiKey}`,
+              },
+            }
+          );
+          // return response.data.choices[0].text.trim();
+          const generatedText = response.data.choices[0].text.trim();
+
+          return generatedText;
+        } catch (error) {
+          console.error("Error generating detailed prompt:", error);
+          throw error;
+        }
+      }
+
+      async function fetchGeneratedImages(imagePrompt) {
+        if (imagePrompt === "") {
+          imagePrompt = "cute kitten";
+        }
+        try {
+          const response = await axios.post(
+            "https://api.openai.com/v1/images/generations",
+            {
+              model: "image-alpha-001",
+              prompt: `${imagePrompt}`,
+              num_images: 1,
+              size: "512x512",
+              response_format: "url",
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                //Authorization: `Bearer ${apiKey}`,
+                Authorization: `Bearer ${apiKey}`,
+              },
+            }
+          );
+          return response.data.data.map((image) => image.url);
+        } catch (error) {
+          console.error("Error fetching generated images:", error);
+          throw error;
+        }
+      }
+
+      const detailedPrompt = await generateDetailedPrompt(dishName);
+      console.log("detailed davinci prompt: ", detailedPrompt);
+      const urls = await fetchGeneratedImages(dishName);
+
+      console.log("generated image urls: ", urls);
+
+      const response = await axios.get(url, {
+        responseType: "arraybuffer",
+      });
+      const buffer = Buffer.from(response.data, "binary");
+      const uuid = uuidv4();
+
+      const base64Image = buffer.toString("base64");
+      const imageUrl = await uploadImageToGCS(
+        base64Image,
+        // "some-unique-image-filename"
+        uuid
+      );
+      console.log("base64 converted dall-e image uploaded to gcs:", imageUrl);
+      //store the above url in gcs and get the url; store the url in mongoDB under the user's saved recipes
+
+      //store in gcs and get the url; store the url in mongoDB
 
       //store in elastic search
       const newRecipe = {
         name: dishName,
-        ingredients: dishIngredients,
-        recipe: dishRecipe,
+        image: imageUrl,
       };
 
       //store the new user profile in the elastic-search index
@@ -240,8 +324,8 @@ module.exports = {
           $push: {
             savedRecipes: {
               name: dishName,
-              ingredients: dishIngredients,
-              recipe: dishRecipe,
+              imgUrl: imageUrl,
+              recipe: detailedPrompt,
             },
           },
         },
