@@ -44,7 +44,7 @@ const USER_DETAILS = gql`
     favCuisines
     savedRecipes {
       imgUrl
-      recipe
+      name
     }
     collectionPublic
     profilePublic
