@@ -194,19 +194,7 @@ module.exports = {
         throw error;
       }
     },
-    getLoggedInUsername: async (_, { input }, { models }) => {
-      //retrieving the loggedInUsername stored in redis
-      await redisClient.get("loggedInUser", (error, username) => {
-        if (error) {
-          console.error("Error retrieving username from Redis:", error);
-        } else if (username) {
-          console.log("Username retrieved from Redis:", username);
-          return username;
-        } else {
-          console.log("No username found in Redis");
-        }
-      });
-    },
+   
   },
   Mutation: {
     verifyUniqueness: async (_, { input }, { models }) => {
@@ -220,6 +208,19 @@ module.exports = {
       } else {
         return "username available";
       }
+    },
+     getLoggedInUsername: async (_, { input }, { models }) => {
+      //retrieving the loggedInUsername stored in redis
+      await redisClient.get("loggedInUser", (error, username) => {
+        if (error) {
+          console.error("Error retrieving username from Redis:", error);
+        } else if (username) {
+          console.log("Username retrieved from Redis:", username);
+          return username;
+        } else {
+          console.log("No username found in Redis");
+        }
+      });
     },
     searchUsers: async (_, { input, skip = 0, limit = 100 }, { models }) => {
       const filterAttributes = [
