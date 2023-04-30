@@ -111,7 +111,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
                 //   WebkitTextStroke: "2px #2563EB", // Adjust the stroke width and color as needed
                 // }}
               >
-                Ambrosia Garden
+                Ambrosia
               </h1>
             </div>
           </div>
