@@ -123,7 +123,7 @@ const typeDefs = gql`
   }
 
   input GetUserRecipes {
-    username: String!
+    username: String
   }
 
   input SaveDesign {
@@ -150,7 +150,7 @@ const typeDefs = gql`
   }
   
   input SaveRecipeInput {
-    username: String!
+    username: String
     name: String
   }
 
