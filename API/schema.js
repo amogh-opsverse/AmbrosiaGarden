@@ -179,7 +179,7 @@ const typeDefs = gql`
     contactUser(input: ContactUser): String
     
     #getLoggedInUsername(testInput: String): String #a query which can be used to get the username of the logged in user
-    getLoggedInUsername: String
+    getLoggedInUsername(noInput: String): String
 
   }
 `;
