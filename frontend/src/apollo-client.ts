@@ -33,7 +33,7 @@ const delay = setContext(
 
 const cache = new InMemoryCache();
 const http = new HttpLink({
-  uri: "http://localhost:3000/graphql",
+  uri: "ambrosia-garden.vercel.app/saveRecipe",
 });
 
 const link = ApolloLink.from([delay, http]);
