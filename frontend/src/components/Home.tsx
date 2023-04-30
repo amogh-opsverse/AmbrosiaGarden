@@ -118,11 +118,6 @@ const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [backgroundSelection, setBackgroundSelection] = useState("outdoor");
 
-  const darkBackgroundPicIndoor = new Image();
-  darkBackgroundPicIndoor.src = "./src/assets/mnight.jpg";
-  darkBackgroundPicIndoor.onload = () => {
-    document.body.style.backgroundImage = `url(./src/assets/oxbow.jpg)`;
-  };
 
   // Define your background images for each category and mode
   // const indoorBackgrounds = {
