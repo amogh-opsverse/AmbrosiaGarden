@@ -23,6 +23,7 @@ interface User {
   name: string;
   email: string;
   bio: string;
+  favCuisines: string[];
 }
 
 interface RecommendationsResultsProps {
@@ -73,7 +74,7 @@ interface FormData {
   image: string;
   university: string;
   major: string;
- // favCuisines: string[];
+  favCuisines: string[];
 }
 
 interface University {
