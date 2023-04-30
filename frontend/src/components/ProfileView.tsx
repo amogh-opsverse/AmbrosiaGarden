@@ -73,7 +73,7 @@ interface FormData {
   image: string;
   university: string;
   major: string;
-  favCuisines: string[];
+ // favCuisines: string[];
 }
 
 interface University {
