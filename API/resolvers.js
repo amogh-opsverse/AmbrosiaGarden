@@ -891,92 +891,24 @@ module.exports = {
       const { username } = input;
       const filter = { username };
       
-        const user = await models.User.findOne(filter);
-        if (!user) {
-          throw new Error("User not found");
-        }
+        try {
+    const user = await models.User.findOne(filter);
+    if (!user) {
+      throw new Error("User not found");
+    }
 
-        const savedRecipes = user.savedRecipes;
-        console.log("User saved images:", savedRecipes);
+    const savedRecipes = user.savedRecipes;
+    console.log("User saved images:", savedRecipes);
 
-        // Cache the data in Redis with an expiration time (e.g., 3600 seconds = 1 hour)
+    // Cache the data in Redis with an expiration time (e.g., 3600 seconds = 1 hour)
 
-        return savedRecipes;
-      } catch (error) {
-        console.error("Error fetching user designs:", error);
-        throw error;
-      }
+    return savedRecipes;
+  } catch (error) {
+    console.error("Error fetching user designs:", error);
+    throw error;
+  }
     },
 
-    createDesigns: async (_, { input }, { models }) => {
-      async function generateDetailedPrompt(userPrompt) {
-        try {
-          const response = await axios.post(
-            "https://api.openai.com/v1/engines/text-davinci-002/completions",
-            JSON.stringify({
-              //prompt: `Given the user's input: "${userPrompt}", create a detailed description including the words photorealistic and high-quality for the interior design of a living space in a true-to-life manner.`,
-              prompt: `Given the user's input: "${userPrompt}", display a high-quality and photorealistic image of a fusion cuisine dish that creatively combines elements from different culinary traditions.`,
-              //The description should capture the essence of the theme, include essential elements, and describe the atmosphere, furniture, decorations, color scheme, and other aspects of the room in a true-to-life manner.`,
-              max_tokens: 150, // Increase max tokens if necessary
-              n: 1, // Generate multiple responses
-              stop: null, // Stop when encountering a newline character
-              //temperature: 0.6, // Adjust the temperature for more diverse outputs
-              top_p: 0.7, // Use top_p instead of temperature for more focused outputs
-              echo: false, // Do not include the input prompt in the response
-            }),
-            {
-              headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                Authorization: `Bearer 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`,
-              },
-            }
-          );
-          // return response.data.choices[0].text.trim();
-          const generatedText = response.data.choices[0].text.trim();
-
-          return generatedText;
-        } catch (error) {
-          console.error("Error generating detailed prompt:", error);
-          throw error;
-        }
-      }
-
-      async function fetchGeneratedImages(imagePrompt) {
-        if (imagePrompt === "") {
-          imagePrompt = "cute kitten";
-        }
-        try {
-          const response = await axios.post(
-            "https://api.openai.com/v1/images/generations",
-            {
-              model: "image-alpha-001",
-              prompt: `${imagePrompt}`,
-              num_images: 1,
-              size: "512x512",
-              response_format: "url",
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                //Authorization: `Bearer ${apiKey}`,
-                Authorization:
-                  "Bearer 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",
-              },
-            }
-          );
-          return response.data.data.map((image) => image.url);
-        } catch (error) {
-          console.error("Error fetching generated images:", error);
-          throw error;
-        }
-      }
-
-      const detailedPrompt = await generateDetailedPrompt(input.prompt);
-      console.log("detailed davinci prompt: ", detailedPrompt);
-      const urls = await fetchGeneratedImages(detailedPrompt);
-
-      console.log("generated image urls: ", urls);
-      return urls;
-    },
+    
   },
 };
