@@ -40,7 +40,17 @@ async function indexAmbrosiaProfile(id, profile) {
     console.error("Error indexing ambrosia profile:", error);
   }
 }
-
+async function indexAmbrosiaRecipe(id, recipe) {
+  try {
+    await client.index({
+      index: "search-ambrosia",
+      id: id,
+      body: recipe,
+    });
+  } catch (error) {
+    console.error("Error indexing ambrosia profile:", error);
+  }
+}
 async function searchAmbrosiaProfiles(query) {
   try {
     const response = await client.search({
@@ -81,6 +91,7 @@ module.exports = {
   client,
   createIndex,
   indexAmbrosiaProfile,
+  indexAmbrosiaRecipe,
   searchAmbrosiaProfiles,
   updateElasticsearchUser,
 };
