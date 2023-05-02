@@ -17,6 +17,7 @@ const optimizeImage = (url: any) => {
   const optimizedParams = "w_400,c_fit,q_auto,f_auto/";
   return `${cloudinaryURL}${optimizedParams}${encodeURIComponent(url)}`;
 };
+
 // Assuming that each user has an id, name, and other attributes
 interface User {
   username: string;
@@ -333,18 +334,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                       <h3 style={h3Style}>
                         University: {selectedUser.university}
                       </h3>
-                      <h3 style={h3Style}>Gender: {selectedUser.gender}</h3>
                       <h3 style={h3Style}>Major: {selectedUser.major}</h3>
                       <h3 style={h3Style}>
                         Personality: {selectedUser.personality}
                       </h3>
-                      <h3 style={h3Style}>
-                        Sleep Time:{" "}
-                        {getSleepTimeDescription(selectedUser.sleepTime)}
-                      </h3>
-                      <h3 style={h3Style}>Hygiene: {selectedUser.hygiene}</h3>
-                      <h3 style={h3Style}>Smokes: {selectedUser.smoking}</h3>
-                      <h3 style={h3Style}>Has Pets: {selectedUser.pets}</h3>
                     </div>
                     <hr className="flame border-t border-black mt-8" />
                     <h2
@@ -357,7 +350,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                           "0px 2px 4px rgba(0, 0, 0, 0.5), 0px 4px 6px rgba(0, 0, 0, 0.25)",
                       }}
                     >
-                      Design Collection:
+                      Recipe Collection:
                     </h2>
                     {selectedUser.collectionPublic === true ? (
                       <div
@@ -365,8 +358,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                         style={{ maxHeight: "725px", overflowY: "auto" }}
                       >
                         {(activeSearch === "redux"
-                          ? selectedUser.savedImages
-                          : selectedUser.collection
+                          ? selectedUser.savedRecipes
+                          : selectedUser.savedRecipes
                         ).map((url: any, index: any) => (
                           <div
                             key={index}
@@ -381,7 +374,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                               textAlign: "center", // Add this for center alignment
                             }}
                           >
-                            <div>
+                            {/* <div>
                               <AiOutlineSave
                                 className="save-icon absolute"
                                 size={34}
@@ -395,7 +388,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                                 }}
                                 title={"Save to collection"}
                               />
-                            </div>
+                            </div> */}
                             <div
                               style={{
                                 // border: "3px solid #e0e0e0",
@@ -421,7 +414,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                                 textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Text shadow
                               }}
                             >
-                              &ldquo;{url.prompt}&rdquo;
+                              &ldquo;{url.name}&rdquo;
                             </div>
                           </div>
                         ))}
@@ -434,7 +427,25 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                           // overflowY: "auto",
                         }}
                       >
-                        <div className="rlame"></div>
+                        <div className="flex flex-col items-center">
+                          <div className="rlame" />
+
+                          <h2
+                            className="text-xl font-semibold mb-4 mt-4 text-center text-white"
+                            style={{
+                              fontFamily: "Roboto, sans-serif",
+                              fontSize: "15px",
+                              letterSpacing: "0.05em",
+                              textShadow:
+                                "0px 2px 4px rgba(0, 0, 0, 0.5), 0px 4px 6px rgba(0, 0, 0, 0.25)",
+                            }}
+                          >
+                            User's Collection is Private
+                          </h2>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
                         <h2
                           className="text-xl font-semibold mb-4 mt-4 text-center text-white"
                           style={{
@@ -445,75 +456,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                               "0px 2px 4px rgba(0, 0, 0, 0.5), 0px 4px 6px rgba(0, 0, 0, 0.25)",
                           }}
                         >
-                          User's Collection is Private:
+                          User's Collection is Private
                         </h2>
-                      </div>
-                    ) : (
-                      <div
-                        className="image-grid mt-8"
-                        style={{ maxHeight: "725px", overflowY: "auto" }}
-                      >
-                        {(activeSearch === "redux"
-                          ? selectedUser.savedImages
-                          : selectedUser.collection
-                        ).map((url: any, index: any) => (
-                          <div
-                            key={index}
-                            className="images-container relative"
-                            style={{
-                              border: "3px solid #e0e0e0",
-                              display: "inline-block",
-                              borderRadius: "10px",
-                              padding: "5px",
-                              boxSizing: "border-box",
-                              marginBottom: "16px",
-                              textAlign: "center", // Add this for center alignment
-                            }}
-                          >
-                            <div>
-                              <AiOutlineSave
-                                className="save-icon absolute"
-                                size={34}
-                                onClick={() =>
-                                  handleSaveImage(url.imgUrl, url.prompt)
-                                }
-                                style={{
-                                  top: "10px",
-                                  left: "10px",
-                                  cursor: "pointer",
-                                }}
-                                title={"Save to collection"}
-                              />
-                            </div>
-                            <div
-                              style={{
-                                // border: "3px solid #e0e0e0",
-                                display: "inline-block",
-                                borderRadius: "10px",
-                                padding: "5px",
-                                boxSizing: "border-box",
-                              }}
-                            >
-                              <LazyLoadImage
-                                //src={url.imgUrl}
-                                src={optimizeImage(url.imgUrl)}
-                                className="rounded-lg"
-                              />
-                            </div>
-                            <div
-                              style={{
-                                textAlign: "center",
-                                marginTop: "8px",
-                                fontStyle: "italic",
-                                fontSize: "14px",
-                                color: "#E4E1D0", // Bone white color
-                                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Text shadow
-                              }}
-                            >
-                              &ldquo;{url.prompt}&rdquo;
-                            </div>
-                          </div>
-                        ))}
                       </div>
                     )}
                   </div>
