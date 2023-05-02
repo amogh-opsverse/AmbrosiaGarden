@@ -7,6 +7,7 @@ const {
   indexAmbrosiaProfile,
   searchAmbrosiaProfiles,
   updateElasticsearchUser,
+  indexAmbrosiaRecipe,
 } = require("./elasticsearch");
 //import { CourierClient } from "@trycourier/courier";
 const { CourierClient } = require("@trycourier/courier");
@@ -315,7 +316,7 @@ module.exports = {
 
       //store the new user profile in the elastic-search index
       let newRecipeId = uuidv4(); //randomly generate uuidv4
-      indexAmbrosiaProfile(newRecipeId, newRecipe);
+      indexAmbrosiaRecipe(newRecipeId, newRecipe);
 
       //store in mongoDB
       const updatedUser = await models.User.findOneAndUpdate(
