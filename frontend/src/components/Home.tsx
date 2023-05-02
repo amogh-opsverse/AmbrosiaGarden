@@ -494,11 +494,11 @@ const Home = () => {
                     marginRight: "auto",
                   }}
                 >
-                  <DALLEImageView
+                  {/* <DALLEImageView
                     loggedInUser={username}
                     fScreenState={setIsFullscreen}
                     fullScreenBool={isFullscreen}
-                  /> 
+                  /> */}
                 </div>
               </div>
             </div>
