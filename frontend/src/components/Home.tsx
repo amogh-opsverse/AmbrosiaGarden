@@ -19,6 +19,7 @@ import "./background.css";
 import "./powerup.css";
 import "./home.css";
 import lightBackgroundPicOutdoor from "../assets/ambrosialight.jpg";
+//import lightBackgroundPicOutdoor from "./backgroundramsai.jpg";
 import darkBackgroundPicOutdoor from "../assets/ambrosiadark.jpeg";
 import SearchResults from "./SearchResults";
 import Recommendations from "./Recommendations";
@@ -26,7 +27,6 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import DALLEImageView from "./GPT";
 import { useSelector } from "react-redux";
-
 
 interface User {
   username: string;
@@ -37,7 +37,7 @@ interface User {
   university: string;
   bio: string;
   imgUrl: string;
-  savedRecipes: [string];
+  savedRecipes: [any];
   collectionPublic: boolean;
   profilePublic: boolean;
 }
@@ -54,6 +54,12 @@ const USER_DETAILS = gql`
     personality
     major
     university
+    savedRecipes {
+      imgUrl
+      name
+    }
+    profilePublic
+    collectionPublic
   }
 `;
 
@@ -82,13 +88,8 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
- 
-
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [backgroundSelection, setBackgroundSelection] = useState("outdoor");
-
-
- 
 
   const outdoorBackgrounds = {
     light: lightBackgroundPicOutdoor,
@@ -122,7 +123,7 @@ const Home = () => {
 
     let searchUniversity = "";
     //destructure the attributes object
-    const { Guests, Personality, Pets, SleepTime, University } = attributes;
+    const { Personality, University } = attributes;
     //if university is selected (true) set the university field to match the logged in user's university
     if (University) {
       searchUniversity = university;
@@ -130,13 +131,11 @@ const Home = () => {
       searchUniversity = "";
     }
 
-    console.log("Guests search response:", typeof Guests);
+    //console.log("Guests search response:", typeof Guests);
     //making sure the input keys match the input fields defined in the schema
     const input = {
       user: username,
       university: searchUniversity,
-      pets: Pets,
-      sleepTime: SleepTime,
       personality: Personality,
     };
 
@@ -154,12 +153,11 @@ const Home = () => {
       email: user.email, // Replace 'email' with the appropriate property from the user object
       bio: user.bio, // Replace 'attributes' with the appropriate property from the user object
       imgUrl: user.imgUrl,
-      collection: user.savedImages,
       personality: user.personality,
-      gender: user.gender,
       major: user.major,
       university: user.university,
       collectionPublic: user.collectionPublic,
+      savedRecipes: user.savedRecipes, //saving the recipes in the search results
       profilePublic: user.profilePublic,
     }));
     console.log("searchResults structure", searchResults);
@@ -494,11 +492,11 @@ const Home = () => {
                     marginRight: "auto",
                   }}
                 >
-                  {/* <DALLEImageView
+                  <DALLEImageView
                     loggedInUser={username}
                     fScreenState={setIsFullscreen}
                     fullScreenBool={isFullscreen}
-                  /> */}
+                  />
                 </div>
               </div>
             </div>
