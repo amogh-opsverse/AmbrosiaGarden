@@ -41,13 +41,6 @@ const RECIPE_DETAILS = gql`
   }
 `;
 
-//make sure the mutation exists in the backend
-const GENERATE_IMAGES = gql`
-  mutation GenerateDesigns($input: GenerateDesigns) {
-    createDesigns(input: $input)
-  }
-`;
-
 const SAVE_IMAGE = gql`
   mutation SaveDesign($input: SaveDesign) {
     saveUserDesign(input: $input)
@@ -97,36 +90,18 @@ const DALLEImageView: React.FC<DallEProps> = ({
 }) => {
   // const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const [userPrompt, setUserPrompt] = useState("");
-  const [imageURLs, setImageURLs] = useState([]);
   const [collectionURLs, setCollectionURLs] = useState<any>();
   const [searchLoading, setSearchLoading] = useState(false);
-  const [generateImages, generatedImages] = useMutation(GENERATE_IMAGES);
   const [updateUserPrivacy, updatedUserPrivacy] = useMutation(UPDATE_PRIVACY);
   const [getUserPrivacy, userPrivacy] = useMutation(GET_PRIVACY);
   const [getRecipes, userRecipes] = useMutation(GET_RECIPES);
   const [saveImage, savedImage] = useMutation(SAVE_IMAGE);
   const [deleteImage, deletedImage] = useMutation(DELETE_IMAGE);
-  const [isViewingCollection, setIsViewingCollection] = useState(false);
+  const [recipesLoaded, setRecipesLoaded] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("collectionURLS: ", collectionURLs);
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const input = {
-      prompt: userPrompt,
-    };
-    setSearchLoading(true);
-
-    const { data } = await generateImages({
-      variables: { input },
-    }); //execute the mutation react hook
-    console.log("response generated images:", data);
-    setSearchLoading(false);
-    setImageURLs(data.createDesigns);
-  };
+  //console.log("collectionURLS: ", collectionURLs);
 
   //refactor this to execute the mutation query to save the selected image in mongodb
   const handleSaveImage = async (url: any, usersPrompt: any) => {
@@ -168,7 +143,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
       },
     }); //execute the mutation react hook
     console.log("response deleted image:", data);
-    refetchCollection();
+    //refetchCollection();
     setSearchLoading(false);
     //setImageURLs(data.createDesigns);
   };
@@ -189,11 +164,15 @@ const DALLEImageView: React.FC<DallEProps> = ({
       let collection = await getRecipes({
         variables: { input }, //the input has to match the input schema type defined in backend
       });
-      console.log("design collections: ", collection);
-      // setCollectionURLs(collection.data.getUserDesigns); //useState setter to set the returned recommendations
-      const verifiedURLArr = await checkImage(collection.data.getUserDesigns);
+      console.log(
+        "the value of collectionPublic for loggedInUser gpt ",
+        collection.data.getUserDesigns
+      );
+
+      //setting the initial privacy state to the one stored in the db
+
+      const verifiedURLArr = await checkImage(collection.data.getUserRecipes);
       setCollectionURLs(verifiedURLArr);
-      //setCollectionURLs(verifiedURLs);
       setSearchLoading(false);
     } catch (error) {
       console.error("Error fetching recommended users:", error);
@@ -284,14 +263,16 @@ const DALLEImageView: React.FC<DallEProps> = ({
 
       setIsImagesPublic(priv.data.getUserPrivacy);
       setIsLoading(false);
-      //console.log("is images public value:", isImagesPublic);
-
-      // console.log("is images public value:", isImagesPublic);
+      setRecipesLoaded(true);
     };
+    console.log("wtf bruh");
     fetchCollection();
     fetchUserPrivacy();
   }, []);
 
+  // if (collectionURLs) {
+  //   setRecipesLoaded(true);
+  // }
   useEffect(() => {
     console.log("is images public value:", isImagesPublic);
   }, [isImagesPublic]);
@@ -384,7 +365,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
           </button>
           <div className="glame"></div>
         </div>
-      ) : isViewingCollection ? (
+      ) : (
         <>
           <div className="flex flex-col h-full items-center">
             <p
@@ -403,62 +384,63 @@ const DALLEImageView: React.FC<DallEProps> = ({
             {isLoading ? (
               <p>Loading...</p>
             ) : (
-              <div className="flex items-center mt-1 mb-2">
-                <label
-                  htmlFor="toggleCollection"
-                  className="flex items-center cursor-pointer"
-                >
-                  <div className="relative">
-                    <div>
-                      <span className="text-white mr-2">Make Private?</span>
-
-                      <input
-                        type="checkbox"
-                        id="toggleCollection"
-                        className="cursor-pointer"
-                        checked={!isImagesPublic || false}
-                        onChange={handleToggle}
-                      />
+              <>
+                <div className="flex items-center mt-1 mb-2">
+                  <label
+                    htmlFor="toggleCollection"
+                    className="flex items-center cursor-pointer"
+                  >
+                    <div className="relative">
                       <div>
-                        <label
-                          htmlFor="toggleCollection"
-                          className="cursor-pointer text-white"
-                          style={{ fontSize: "13px" }}
-                        >
-                          current status:{" "}
-                          {isImagesPublic ? "Public" : "Private"}
-                        </label>
+                        <span className="text-white mr-2">Make Private?</span>
+
+                        <input
+                          type="checkbox"
+                          id="toggleCollection"
+                          className="cursor-pointer"
+                          checked={!isImagesPublic || false}
+                          onChange={handleToggle}
+                        />
+                        <div>
+                          <label
+                            htmlFor="toggleCollection"
+                            className="cursor-pointer text-white"
+                            style={{ fontSize: "13px" }}
+                          >
+                            current status:{" "}
+                            {isImagesPublic ? "Public" : "Private"}
+                          </label>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </label>
-              </div>
+                  </label>
+                </div>
+                <div>
+                  <button
+                    onClick={() => {
+                      refetchCollection();
+                    }}
+                    className="opacity-60 view-collection-button  mb-2"
+                    style={{
+                      backgroundColor: "blue",
+                      color: "white",
+                      border: "none",
+                      padding: "8px 16px",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <>
+                      <div className="">
+                        <AiOutlineEye />
+                      </div>
+                    </>
+                  </button>
+                </div>
+              </>
             )}
             <hr className="border-t border-white w-1/2 mt-1 mb-4" />
           </div>
-          <button
-            onClick={() => {
-              setIsViewingCollection(!isViewingCollection);
-            }}
-            className=" opacity-60 view-collection-button"
-            style={{
-              backgroundColor: "blue",
-              color: "white",
-              border: "none",
-              padding: "2px 16px",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            {isViewingCollection ? (
-              "Create"
-            ) : (
-              <>
-                <AiOutlineEye />
-                {/* <span style={{ marginLeft: "8px" }}>View Collection</span> */}
-              </>
-            )}
-          </button>
           <div
             className="image-grid mt-10"
             style={{
@@ -468,182 +450,67 @@ const DALLEImageView: React.FC<DallEProps> = ({
             }}
           >
             {/* Render your collection view here */}
-            <div className="image-grid mt-2">
-              {collectionURLs.map((url: any, index: any) => (
-                <div
-                  style={{
-                    border: "2px solid #e0e0e0",
-                    display: "inline-block",
-                    borderRadius: "15px",
-                    padding: "5px",
-                    boxSizing: "border-box",
-                    marginBottom: "10px",
-                    textAlign: "center", // Add this for center alignment
-                  }}
-                >
-                  <div key={index} className="images-container relative">
-                    <AiOutlineDelete
-                      className="save-icon absolute"
-                      size={34}
-                      onClick={() => handleDeleteImage(url.imgUrl)}
-                      style={{
-                        top: "10px",
-                        left: "57%",
-                        transform: "translateX(-90%)",
-                        cursor: "pointer",
-                      }}
-                      title={"Save to collection"}
-                    />
-                    <AiOutlinePicture
-                      className="squoosh-icon absolute "
-                      size={34}
-                      onClick={() =>
-                        openWithSquoosh(url.imgUrl, "squoosh-dalle.png")
-                      }
-                      style={{
-                        top: "10px",
-                        left: "50%",
-                        transform: "translateX(-90%)",
-                        cursor: "pointer",
-                      }}
-                      title={"Open with squoosh"}
-                    />
-                    <img src={url.imgUrl} className="rounded-lg" />
-                  </div>
+            {recipesLoaded ? (
+              <div className="image-grid mt-2">
+                {collectionURLs.map((url: any, index: any) => (
                   <div
                     style={{
-                      textAlign: "center",
-                      marginTop: "8px",
-                      fontStyle: "italic",
-                      fontSize: "14px",
-                      color: "#E4E1D0", // Bone white color
-                      textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Text shadow
-                    }}
-                  >
-                    &ldquo;{url.name}&rdquo;
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="form-group">
-            <p
-              className="text font-semibold mb-8 text-center text-white opacity-70"
-              style={{
-                fontFamily: "Roboto, sans-serif",
-                fontSize: "20px",
-                // width: "369px",
-                letterSpacing: "0.05em",
-                textShadow:
-                  "0px 2px 4px rgba(0, 0, 0, 0.5), 0px 4px 6px rgba(0, 0, 0, 0.25)",
-              }}
-            >
-              {isViewingCollection
-                ? "View Collection"
-                : "Visualize Your Fusion Recipe:"}
-            </p>
-            <div>
-              <button
-                onClick={() => {
-                  refetchCollection();
-                  setIsViewingCollection(!isViewingCollection);
-                }}
-                className="opacity-60 view-collection-button  mb-2"
-                style={{
-                  backgroundColor: "blue",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 16px",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                }}
-              >
-                {isViewingCollection ? (
-                  "Create"
-                ) : (
-                  <>
-                    <div className="">
-                      <AiOutlineEye />
-                    </div>
-                    {/* <span style={{ marginLeft: "8px" }}>View Collection</span> */}
-                  </>
-                )}
-              </button>
-            </div>
-
-            <input
-              type="text"
-              id="prompt-input"
-              //className="form-input mb-4 mt-6 opacity-70 "
-              className="form-input mb-4 mt-6 opacity-70 w-4/5 mx-auto"
-              placeholder="input the name of dish created by Ramsai"
-              value={userPrompt}
-              onChange={(e) => setUserPrompt(e.target.value)}
-              style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}
-            />
-          </div>
-          <button
-            onClick={handleSubmit}
-            //className="opacity-61 submit-button mt-1 bg-blue-600"
-            className="opacity-61 submit-button mt-1 bg-blue-600 w-1/3 mx-auto"
-
-            // style={{ width: "30%", marginLeft: "auto", marginRight: "auto" }}
-          >
-            Cook
-          </button>
-
-          <div className="image-grid mt-20">
-            {imageURLs.map((url, index) => (
-              <>
-                <div key={index} className="images-container relative">
-                  <div>
-                    <AiOutlineSave
-                      className="save-icon absolute"
-                      size={34}
-                      onClick={() => handleSaveImage(url, userPrompt)}
-                      style={{ top: "10px", left: "10px", cursor: "pointer" }}
-                      title={"Save to collection"}
-                    />
-                    <AiOutlinePicture
-                      className="squoosh-icon absolute "
-                      size={34}
-                      onClick={() => openWithSquoosh(url, "squoosh-dalle.png")}
-                      style={{
-                        top: "10px",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        cursor: "pointer",
-                      }}
-                      title={"Open with squoosh"}
-                    />
-                    <AiOutlineExpand
-                      className="download-icon"
-                      size={34}
-                      onClick={() => downloadImage(url)}
-                      title={"Open in new tab"}
-                    />
-                  </div>
-                  <div
-                    style={{
-                      border: "3px solid #e0e0e0",
+                      border: "2px solid #e0e0e0",
                       display: "inline-block",
-                      borderRadius: "10px",
+                      borderRadius: "15px",
                       padding: "5px",
                       boxSizing: "border-box",
+                      marginBottom: "10px",
+                      textAlign: "center", // Add this for center alignment
                     }}
                   >
-                    <img
-                      src={url}
-                      // alt="Generated Room"
-                      className="rounded-lg"
-                    />
+                    <div key={index} className="images-container relative">
+                      <AiOutlineDelete
+                        className="save-icon absolute"
+                        size={34}
+                        onClick={() => handleDeleteImage(url.imgUrl)}
+                        style={{
+                          top: "10px",
+                          left: "57%",
+                          transform: "translateX(-90%)",
+                          cursor: "pointer",
+                        }}
+                        title={"Save to collection"}
+                      />
+                      <AiOutlinePicture
+                        className="squoosh-icon absolute "
+                        size={34}
+                        onClick={() =>
+                          openWithSquoosh(url.imgUrl, "squoosh-dalle.png")
+                        }
+                        style={{
+                          top: "10px",
+                          left: "50%",
+                          transform: "translateX(-90%)",
+                          cursor: "pointer",
+                        }}
+                        title={"Open with squoosh"}
+                      />
+                      <img src={url.imgUrl} className="rounded-lg" />
+                    </div>
+                    <div
+                      style={{
+                        textAlign: "center",
+                        marginTop: "8px",
+                        fontStyle: "italic",
+                        fontSize: "14px",
+                        color: "#E4E1D0", // Bone white color
+                        textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Text shadow
+                      }}
+                    >
+                      &ldquo;{url.name}&rdquo;
+                    </div>
                   </div>
-                </div>
-              </>
-            ))}
+                ))}
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
         </>
       )}
