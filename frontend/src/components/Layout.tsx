@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               className="text-lg font-semibold text-blue-800 hover:text-blue-600"
             >
               <h1
-                className="text-xl font-semibold text-white rounded p-2 bruh mr-3 mb-1"
+                className="text-2xl font-semibold text-white rounded p-2 bruh mr-3 mb-1"
                 // style={{
                 //   WebkitTextStroke: "1px #2563EB", // Adjust the stroke width and color as needed
                 // }}
