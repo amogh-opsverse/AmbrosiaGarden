@@ -375,7 +375,7 @@ const Recommendations: React.FC<RecommendationsResultsProps> = ({
                               className="save-icon absolute"
                               size={34}
                               onClick={() =>
-                                handleSaveImage(url.imgUrl, url.prompt)
+                                handleSaveImage(url.imgUrl, url.name)
                               }
                               style={{
                                 top: "10px",
@@ -406,7 +406,7 @@ const Recommendations: React.FC<RecommendationsResultsProps> = ({
                               textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Text shadow
                             }}
                           >
-                            &ldquo;{url.prompt}&rdquo;
+                            &ldquo;{url.name}&rdquo;
                           </div>
                         </div>
                       ))}
