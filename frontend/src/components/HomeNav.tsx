@@ -60,7 +60,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
                 className="absolute -top-4 -left-10 z-[-1] filter drop-shadow-whiteGlow"
               ></svg> */}
               <h1
-                className="text-xl font-bold text-white rounded p-2 mb-1 relative"
+                className="text-2xl font-bold text-white rounded p-2 mb-1 relative"
                 // style={{
                 //   WebkitTextStroke: "2px #2563EB", // Adjust the stroke width and color as needed
                 // }}
