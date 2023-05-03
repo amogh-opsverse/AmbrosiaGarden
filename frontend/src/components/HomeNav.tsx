@@ -51,7 +51,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
   return (
   <>
     <nav className="golden fixed top-0 left-0 w-full bg-blue-500 backdrop-blur-md bg-opacity-20 shadow-md z-10 border-t border-black">
-      <div className="container mx-auto px-1 py-3 flex items-center justify-between">
+      <div className="container mx-auto px-1 py-3 flex items-center mr-15 justify-between">
         {/* Left part */}
         <div className="flex items-center">
           {/* Logo and header */}
