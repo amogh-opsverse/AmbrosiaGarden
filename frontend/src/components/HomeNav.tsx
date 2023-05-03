@@ -49,47 +49,39 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <>
-      <nav className="golden fixed top-0 left-0 w-full bg-blue-500 backdrop-blur-md bg-opacity-20 shadow-md z-10 border-t border-black">
-        <div className="container mx-auto px-1 py-3 flex items-center justify-between">
-          <div className="flex-shrink-0">
-            {/* Logo and header */}
-            <div className="bruh relative">
-              {/* <svg
-                width="100%"
-                height="100"
-                className="absolute -top-4 -left-10 z-[-1] filter drop-shadow-whiteGlow"
-              ></svg> */}
-              <h1
-                className="text-2xl font-bold text-white rounded p-2 mb-1 relative"
-                // style={{
-                //   WebkitTextStroke: "2px #2563EB", // Adjust the stroke width and color as needed
-                // }}
-              >
-                Ambrosia
-              </h1>
-            </div>
-          </div>
-
-         <div className="hidden md:flex md:flex-grow items-center">
-          {/* Notion icon */}
-           <a href="https://bstgrp.notion.site/0407339b10c34531a88f27f582443a49?v=4ba8f3d4529f4c3ea25e5d02a42770b6" target="_blank" rel="noopener noreferrer">
-           <img src={NotionIcon} alt="Notion" className="h-10 w-10 cursor-pointer" />
-           </a>
-         </div>
-
-          <div className="flex-shrink-0">
-            {/* Sign out icon */}
-            <Link
-              to="/"
-              className="text-lg font-semibold text-white hover:text-blue-600"
-              //onClick={handleSignOut}
+  <>
+    <nav className="golden fixed top-0 left-0 w-full bg-blue-500 backdrop-blur-md bg-opacity-20 shadow-md z-10 border-t border-black">
+      <div className="container mx-auto px-1 py-3 flex items-center justify-between">
+        {/* Left part */}
+        <div className="flex items-center">
+          {/* Logo and header */}
+          <div className="bruh relative">
+            <h1
+              className="text-2xl font-bold text-white rounded p-2 mb-1 relative"
             >
-              <div>
-                <FontAwesomeIcon icon={faSignOutAlt} size="2x" />
-              </div>
-            </Link>
+              Ambrosia
+            </h1>
           </div>
+        </div>
+
+        {/* Center part (Notion icon) */}
+        <div className="hidden md:flex items-center">
+          <a href="https://bstgrp.notion.site/0407339b10c34531a88f27f582443a49?v=4ba8f3d4529f4c3ea25e5d02a42770b6" target="_blank" rel="noopener noreferrer">
+            <img src={NotionIcon} alt="Notion" className="h-10 w-10 cursor-pointer" />
+          </a>
+        </div>
+
+        {/* Right part */}
+        <div className="flex items-center">
+          {/* Sign out icon */}
+          <Link
+            to="/"
+            className="text-lg font-semibold text-white hover:text-blue-600"
+          >
+            <div>
+              <FontAwesomeIcon icon={faSignOutAlt} size="2x" />
+            </div>
+          </Link>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex-shrink-0 ml-4">
@@ -101,20 +93,22 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile menu */}
-        <div
-          className={`${
-            mobileMenuOpen ? "block" : "hidden"
-          } md:hidden w-full mt-2`}
-        >
+      {/* Mobile menu */}
+      <div
+        className={`${
+          mobileMenuOpen ? "block" : "hidden"
+        } md:hidden w-full mt-2`}
+      >
 
-        </div>
-      </nav>
+      </div>
+    </nav>
 
-      <main>{children}</main>
-    </>
-  );
+    <main>{children}</main>
+  </>
+);
+
 };
 
 export default HomePageNav;
