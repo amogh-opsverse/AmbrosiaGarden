@@ -71,7 +71,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
             </div>
           </div>
 
-         <div className="hidden md:flex md:flex-grow mr-20 items-center">
+         <div className="hidden md:flex md:flex-grow items-center">
           {/* Notion icon */}
            <a href="https://bstgrp.notion.site/0407339b10c34531a88f27f582443a49?v=4ba8f3d4529f4c3ea25e5d02a42770b6" target="_blank" rel="noopener noreferrer">
            <img src={NotionIcon} alt="Notion" className="h-10 w-10 cursor-pointer" />
