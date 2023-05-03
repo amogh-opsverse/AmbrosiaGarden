@@ -53,7 +53,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
     <nav className="golden fixed top-0 left-0 w-full bg-blue-500 backdrop-blur-md bg-opacity-20 shadow-md z-10 border-t border-black">
       <div className="container mx-auto px-1 py-3 flex items-center justify-between">
         {/* Left part */}
-        <div className="flex items-center">
+        <div className="flex items-center space-x-[-40]">
           {/* Logo and header */}
           <div className="bruh relative">
             <h1
@@ -65,7 +65,7 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
         </div>
 
         {/* Center part (Notion icon) */}
-        <div className="hidden md:flex space-x-[-90]">
+        <div className="hidden md:flex">
           <a href="https://bstgrp.notion.site/0407339b10c34531a88f27f582443a49?v=4ba8f3d4529f4c3ea25e5d02a42770b6" target="_blank" rel="noopener noreferrer">
             <img src={NotionIcon} alt="Notion" className="bruh h-16 w-16 cursor-pointer" />
           </a>
