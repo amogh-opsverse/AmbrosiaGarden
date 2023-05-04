@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 //import "../styles/tailwind.css";
+import "./gpt.css";
 import "./login.css";
 import { FiX } from "react-icons/fi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -44,6 +45,7 @@ const LoginForm = () => {
   //implement for recommendations and userprofile page
   //const [modal, setModal] = useState(false);
   //const users = useQuery(GET_USERS);
+  const [searchLoading, setSearchLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -64,7 +66,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+    setSearchLoading(true);
     // Send data to the backend/API for login validation
     try {
       const { username, password } = formData; //destructuring the data to be passed as a req in createUser
@@ -80,6 +82,7 @@ const LoginForm = () => {
         });
         // signedUserData = signedUser["userLogin"]
         console.log("API response:", signedUser.data);
+        setSearchLoading(false);
         navigate("/home", { state: { signedUser } });
       } catch (error) {
         console.error("API error:", error);
@@ -100,6 +103,18 @@ const LoginForm = () => {
         backgroundImage: `url(${backgroundPic})`,
       }}
     >
+      {searchLoading ? (
+        <div
+          className="flex justify-center items-center"
+          style={{
+            height: "135px",
+            // overflowY: "auto",
+          }}
+        >
+          <div className="glame"></div>
+        </div>
+      ) : (
+      <>
       <form
         onSubmit={handleSubmit}
         className=" bg-blue-500 bg-opacity-20 backdrop-blur-md p-8 border border-black rounded-lg shadow-md w-full max-w-md mx-auto"
@@ -182,6 +197,8 @@ const LoginForm = () => {
           Sign Up
         </Link>
       </form>
+      </>
+      )}
     </div>
   );
 };
