@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { setActiveSearch } from "../redux/actions/searchActions";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   faEdit,
@@ -86,6 +87,29 @@ const Home = () => {
 
     // Clean up the timer when the component is unmounted
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    let vfa_userID = uuidv4();
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async = true;
+    script.onload = function () {
+      // @ts-ignore
+      window.voiceflow.chat.load({
+        verify: { projectID: "6451b543d7648100079d2b79" },
+        url: "https://general-runtime.voiceflow.com",
+        userID: `${vfa_userID}`,
+        versionID: "production",
+      });
+    };
+    script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
+    document.body.appendChild(script);
+
+    // Remove script on component unmount
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
 
   const [isDarkMode, setIsDarkMode] = useState(false);
