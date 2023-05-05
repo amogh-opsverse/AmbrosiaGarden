@@ -107,7 +107,8 @@ const Home = () => {
       window.voiceflow.chat.load({
         verify: { projectID: "6451b543d7648100079d2b79" },
         url: "https://general-runtime.voiceflow.com",
-        userID: `${vfa_userID}`,
+        //userID: `${vfa_userID}`,
+        userID: `${username}`,
         versionID: "production",
         user: {
           name: `${username}`,
