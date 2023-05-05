@@ -109,6 +109,10 @@ const Home = () => {
         url: "https://general-runtime.voiceflow.com",
         userID: `${vfa_userID}`,
         versionID: "production",
+        user: {
+          name: `${username}`,
+          
+      },
       });
     };
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
