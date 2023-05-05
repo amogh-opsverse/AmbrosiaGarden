@@ -110,10 +110,6 @@ const Home = () => {
         //userID: `${vfa_userID}`,
         userID: `${username}`,
         versionID: "production",
-        user: {
-          name: `${username}`,
-          
-      },
       });
     };
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
