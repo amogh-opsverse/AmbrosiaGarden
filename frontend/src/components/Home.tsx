@@ -79,6 +79,14 @@ const Home = () => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  const location = useLocation();
+  const { signedUser } = location.state;
+
+  const imgUrl = signedUser["data"]["userLogin"].imgUrl; //the profile pic of the logged in user
+  const university = signedUser["data"]["userLogin"].university;
+  const username = signedUser["data"]["userLogin"].username;
+  const email = signedUser["data"]["userLogin"].email;
+
   useEffect(() => {
     // Set the component to visible after a delay
     const timer = setTimeout(() => {
@@ -99,7 +107,7 @@ const Home = () => {
       window.voiceflow.chat.load({
         verify: { projectID: "6451b543d7648100079d2b79" },
         url: "https://general-runtime.voiceflow.com",
-        userID: `${vfa_userID}`,
+        userID: username,
         versionID: "production",
       });
     };
@@ -133,13 +141,7 @@ const Home = () => {
   const [searchUsers, searchedUsers] = useMutation(SEARCH_USERS);
   const [collapsedImage, setCollapsedImage] = useState(true);
 
-  const location = useLocation();
-  const { signedUser } = location.state;
-
-  const imgUrl = signedUser["data"]["userLogin"].imgUrl; //the profile pic of the logged in user
-  const university = signedUser["data"]["userLogin"].university;
-  const username = signedUser["data"]["userLogin"].username;
-  const email = signedUser["data"]["userLogin"].email;
+  
 
   const handleSearchAttributesChange = async (attributes: any) => {
     setSearchLoading(true);
