@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* <nav className="fixed top-0 left-0 w-full bg-white bg-opacity-50 shadow-md z-10"> */}
       <nav className="fixed top-0 left-0 w-full bg-blue-500 bg-opacity-20 backdrop-blur-lg shadow-md z-10 border-1 border-black hahaha">
         <div className="container mx-auto px-1 py-3 flex items-center justify-between">
-          <div className="">
+          <div style={{ marginLeft: "-10px" }}>
             <Link
               to="/"
               className="text-lg font-semibold text-blue-800 hover:text-blue-600"
