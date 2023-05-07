@@ -80,13 +80,9 @@ const GET_PRIVACY = gql`
 interface DallEProps {
   //for the state function to be passed from the home page
   loggedInUser: any;
-  fScreenState: any;
-  fullScreenBool: any;
 }
 const DALLEImageView: React.FC<DallEProps> = ({
   loggedInUser,
-  fScreenState,
-  fullScreenBool,
 }) => {
   // const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -322,31 +318,11 @@ const DALLEImageView: React.FC<DallEProps> = ({
       // className="dalle-image-view "
       className="dalle-image-view overflow-y-auto"
       style={{
-        maxHeight: fullScreenBool ? "545px" : "745px",
+        maxHeight: "545px",
         overflowY: "auto",
-        //  overflowX: "auto",
+      
       }}
     >
-      <div
-        className="fullscreen-icon-container mr-6"
-        style={{ position: "absolute", top: "10px", right: "10px" }}
-      >
-        {fullScreenBool ? (
-          <AiOutlineFullscreenExit
-            size={28}
-            onClick={() => fScreenState(false)}
-            style={{ cursor: "pointer" }}
-            className="text-white"
-          />
-        ) : (
-          <AiOutlineFullscreen
-            size={28}
-            onClick={() => fScreenState(true)}
-            style={{ cursor: "pointer" }}
-            className="text-white"
-          />
-        )}
-      </div>
 
       {searchLoading ? (
         <div
