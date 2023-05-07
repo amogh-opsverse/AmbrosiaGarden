@@ -418,7 +418,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
           <div
             className="image-grid mt-10"
             style={{
-              maxHeight: "720px",
+              height: "75%",
               overflowY: "auto",
               overflowX: "auto",
             }}
@@ -434,7 +434,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
                       borderRadius: "15px",
                       padding: "5px",
                       boxSizing: "border-box",
-                      marginBottom: "10px",
+                      marginBottom: "5px",
                       textAlign: "center", // Add this for center alignment
                     }}
                   >
