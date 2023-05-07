@@ -510,7 +510,7 @@ const Home = () => {
                 className="image-container"
               >
                 <div
-                  className={`absolute z-10 border backdrop-blur-md border-black w-full bg-blue-500 bg-opacity-25 p-6 rounded-lg shadow-lg transition-all duration-300 ${
+                  className={`absolute z-5 border backdrop-blur-md border-black w-full bg-blue-500 bg-opacity-25 p-6 rounded-lg shadow-lg transition-all duration-300 ${
                     collapsedImage ? "hidden" : "block"
                   } ${isDarkMode ? "golden" : ""} max-w-md mx-auto`}
                   style={{
