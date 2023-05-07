@@ -99,24 +99,18 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    let vfa_userID = uuidv4();
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.async = true;
     script.onload = function () {
       // @ts-ignore
       window.voiceflow.chat.load({
+        container: "chat-widget-wrapper", // Add this line
         verify: { projectID: "6451b543d7648100079d2b79" },
         url: "https://general-runtime.voiceflow.com",
-        //userID: `${vfa_userID}`,
         userID: `${username}`,
         versionID: "production",
       });
- // Add the glowing-chatbot class to the chat container
-    const chatContainer = document.querySelector(".vf-widget-container");
-    if (chatContainer) {
-      chatContainer.classList.add("glowing-chatbot");
-    }
     };
 
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
@@ -124,11 +118,6 @@ const Home = () => {
 
     // Remove script on component unmount
     return () => {
-if (window.voiceflow && window.voiceflow.chat) {
-      // @ts-ignore
-      window.voiceflow.chat.close();
-    }
-
       document.body.removeChild(script);
     };
   }, []);
