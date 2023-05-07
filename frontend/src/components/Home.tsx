@@ -515,8 +515,8 @@ const Home = () => {
                   } ${isDarkMode ? "golden" : ""} max-w-md mx-auto`}
                   style={{
                     maxWidth: "95%",
-                    width: "750px",
-                    height: "320px",
+                    width: "730px",
+                    height: "300px",
                     marginLeft: "auto",
                     marginRight: "auto",
                   }}
