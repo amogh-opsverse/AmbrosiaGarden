@@ -308,7 +308,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
     link.target = "_blank";
     link.download = "generated-image.jpg";
     link.click();
-    const squooshUrl = `https://squoosh.app/?src=${encodeURIComponent(url)}`;
+    const squooshUrl = 'https://squoosh.app/';
     window.open(squooshUrl, "_blank");
   }
 
