@@ -50,19 +50,16 @@ const HomePageNav: React.FC<LayoutProps> = ({ children }) => {
 
   return (
   <>
-    <nav className="golden fixed top-0 left-0 w-full bg-blue-500 backdrop-blur-md bg-opacity-20 shadow-md z-10 border-t border-black">
-      <div className="container mx-auto px-1 py-3 flex items-center justify-between">
-        {/* Left part */}
-        <div className="flex items-center">
-          {/* Logo and header */}
-          <div className="bruh relative">
-            <h1
-              className="text-2xl font-bold text-white rounded p-2 mb-1 relative"
-            >
-              Ambrosia
-            </h1>
+       <nav className="golden fixed top-0 left-0 w-full bg-blue-500 backdrop-blur-md bg-opacity-20 shadow-md z-10 border-t border-black">
+        <div className="container mx-auto px-0 py-3 flex items-center justify-between">
+          <div className="flex-shrink-0">
+            {/* Logo and header */}
+            <div className="bruh relative" style={{ marginLeft: "-10px" }}>
+              <h1 className="text-2xl font-bold text-white rounded p-2 mb-1 relative">
+                Ambrosia
+              </h1>
+            </div>
           </div>
-        </div>
 
         {/* Center part (Notion icon) */}
         <div className="hidden md:flex absolute left-[48%]">
