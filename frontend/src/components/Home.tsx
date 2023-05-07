@@ -16,6 +16,7 @@ import {
   faImages,
 } from "@fortawesome/free-solid-svg-icons";
 import "../styles/pulse.css";
+import "../styles/bot.css";
 import "./background.css";
 import "./powerup.css";
 import "./home.css";
@@ -111,12 +112,23 @@ const Home = () => {
         userID: `${username}`,
         versionID: "production",
       });
+ // Add the glowing-chatbot class to the chat container
+    const chatContainer = document.querySelector(".vf-widget-container");
+    if (chatContainer) {
+      chatContainer.classList.add("glowing-chatbot");
+    }
     };
+
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
     document.body.appendChild(script);
 
     // Remove script on component unmount
     return () => {
+if (window.voiceflow && window.voiceflow.chat) {
+      // @ts-ignore
+      window.voiceflow.chat.close();
+    }
+
       document.body.removeChild(script);
     };
   }, []);
