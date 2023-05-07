@@ -438,7 +438,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
                       textAlign: "center", // Add this for center alignment
                     }}
                   >
-                    <div key={index} className="images-container relative">
+                    <div key={index} className="images-container bg-opacity-30 relative">
                       <AiOutlineDelete
                         className="save-icon absolute"
                         size={34}
