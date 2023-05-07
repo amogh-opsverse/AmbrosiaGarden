@@ -161,27 +161,20 @@ const ProfileInfo: React.FC = () => {
       const file = e.target.files[0];
 
       const config = {
-        quality: 0.7,
-        maxWidth: 800,
-        maxHeight: 800,
+        quality: 0.6,
+        maxWidth: 200,
+        maxHeight: 200,
         autoRotate: true,
         debug: true,
       };
 
-      try {
-        const optimizedImage = await readAndCompressImage(file, config);
-        const reader = new FileReader();
-        reader.readAsDataURL(optimizedImage);
-        reader.onload = () => {
-          if (typeof reader.result === "string") {
-            setFormData({ ...formData, image: reader.result });
-          } else {
-            throw new Error("Error uploading image");
-          }
-        };
-      } catch (error) {
-        console.error("Error resizing image:", error);
-      }
+       try {
+      const optimizedImage = await readAndCompressImage(file, config);
+      const imageUrl = URL.createObjectURL(optimizedImage);
+      setFormData({ ...formData, image: imageUrl });
+    } catch (error) {
+      console.error("Error resizing image:", error);
+    }
     }
   };
 
