@@ -507,14 +507,14 @@ const Home = () => {
               </div>
 
               <div
-                className="image-container fullscreen"
+                className="image-container"
               >
                 <div
                   className={`absolute z-10 border backdrop-blur-md border-black w-full bg-blue-500 bg-opacity-25 p-6 rounded-lg shadow-lg transition-all duration-300 ${
                     collapsedImage ? "hidden" : "block"
-                  } ${isDarkMode ? "golden" : ""}  high-opacity max-w-md mx-auto`}
+                  } ${isDarkMode ? "golden" : ""} max-w-md mx-auto`}
                   style={{
-                    maxWidth:  "95%",
+                    maxWidth: "95%",
                     width: "750px",
                     height: "75%",
                     marginLeft: "auto",
@@ -523,7 +523,6 @@ const Home = () => {
                 >
                   <DALLEImageView
                     loggedInUser={username}
-                   
                   />
                 </div>
               </div>
