@@ -317,7 +317,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
     <div
       className="dalle-image-view overflow-y-auto"
       style={{
-        maxHeight: "545px",
+        maxHeight: "75%",
         overflowY: "auto",
       }}
     >
