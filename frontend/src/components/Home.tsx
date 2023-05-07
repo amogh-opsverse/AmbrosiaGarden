@@ -514,8 +514,8 @@ const Home = () => {
                     collapsedImage ? "hidden" : "block"
                   } ${isDarkMode ? "golden" : ""} max-w-md mx-auto`}
                   style={{
-                    maxWidth: "85%",
-                    width: "670px",
+                    maxWidth: "75%",
+                    width: "600px",
                     height: "240px",
                     marginLeft: "auto",
                     marginRight: "auto",
