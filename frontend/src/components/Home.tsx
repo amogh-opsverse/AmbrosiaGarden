@@ -516,7 +516,7 @@ const Home = () => {
                   style={{
                     maxWidth: "95%",
                     width: "750px",
-                    height: "700px",
+                    height: "300px",
                     marginLeft: "auto",
                     marginRight: "auto",
                   }}
