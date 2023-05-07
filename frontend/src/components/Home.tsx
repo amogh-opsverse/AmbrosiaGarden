@@ -265,22 +265,22 @@ const Home = () => {
             overflowY: "auto",
           }}
         >
-          <div className=" p-4 ">
+          <div>
             <div
-              className={` relative w-full backdrop-blur-md rounded-lg mx-auto mt-16 mb-4 bg-blue-400 bg-opacity-25 flex flex-col items-center justify-around border border-black ${
+              className={`fixed left-0 top-0 h-full backdrop-blur-md rounded-r-lg bg-blue-400 bg-opacity-25 flex flex-col justify-start border border-black ${
                 isDarkMode ? "golden" : ""
               }`}
-              style={{ maxWidth: "55%", maxHeight: "400px" }}
+              style={{ width: "250px" }}
             >
               <div
-                className="text-center relative mb-5"
+                className="text-center relative flex flex-col items-center justify-start"
                 style={{
-                  marginTop: "4rem", // Adjust this value according to the height of the navbar
                   scrollbarWidth: "thin",
                   scrollbarColor: "rgba(0, 0, 0, 0.3) transparent",
+                  paddingTop: "50%",
                 }}
               >
-                <div className="rounded-full mb-16 h-24 w-24 mx-auto mb-2 glow-blue glow-white">
+                <div className="rounded-full mb-2 h-20 w-20 glow-blue glow-white">
                   <img
                     //src={profPic}
                     src={imgUrl}
@@ -289,10 +289,13 @@ const Home = () => {
                   />
                   <div
                     className="absolute bottom-0 right-0 text-blue-800 p-1 rounded-full"
-                    style={{ transform: "translate(10%, 10%)" }}
+                    style={{
+                      transform: "translate(-80%, 10%)",
+                      paddingLeft: "20%",
+                    }}
                   >
                     <button
-                      className="bg-blue-600 opacity-75 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      className="bg-blue-600 opacity-75 text-white py-2 px-3 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                       onClick={() => {
                         dispatch(setActiveSearch("other"));
                         if (!collapsedRecs) {
@@ -312,20 +315,23 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+
               <h2
-                className="text-2xl font-semibold mb-4 text-center text-white mb-10"
+                className="text-2xl font-semibold mb-4 text-center text-white"
                 style={{
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "25px",
                   letterSpacing: "0.05em",
                   textShadow:
                     "0px 2px 4px rgba(0, 0, 0, 0.5), 0px 4px 6px rgba(0, 0, 0, 0.25)",
+                  paddingBottom: "10%",
                 }}
               >
                 hi, {username}
               </h2>
-              <div className="flex justify-center space-x-2 mb-4">
-                <div className="p-4">
+              {/* <div className="flex flex-col justify-center space-x-2 mb-4"> */}
+              <div className="flex flex-col items-center space-y-4 mt-4">
+                <div className="p-4 text-center">
                   <button
                     className="bg-blue-600 backdrop-blur-md opacity-75 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     onClick={() => {
@@ -444,7 +450,7 @@ const Home = () => {
               className="relative w-full mx-auto"
               style={{
                 maxWidth: "55%",
-
+                marginTop: "10%",
                 // overflowY: "auto",
               }}
             >
@@ -508,13 +514,11 @@ const Home = () => {
                 <div
                   className={`absolute z-10 border backdrop-blur-md border-black w-full bg-blue-500 bg-opacity-25 p-6 rounded-lg shadow-lg transition-all duration-300 ${
                     collapsedImage ? "hidden" : "block"
-                  } ${isDarkMode ? "golden" : ""} ${
-                    isFullscreen ? "high-opacity" : ""
-                  } max-w-md mx-auto`}
+                  } ${isDarkMode ? "golden" : ""}  "high-opacity" max-w-md mx-auto`}
                   style={{
-                    maxWidth: isFullscreen ? "95%" : "750px",
+                    maxWidth:  "95%",
                     width: "750px",
-                    height: isFullscreen ? "75%" : "850px",
+                    height: "75%",
                     marginLeft: "auto",
                     marginRight: "auto",
                   }}
