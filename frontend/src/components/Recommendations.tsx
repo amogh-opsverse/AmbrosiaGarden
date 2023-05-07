@@ -228,7 +228,7 @@ const Recommendations: React.FC<RecommendationsResultsProps> = ({
             className="flex  flex-col h-full"
             style={{ maxHeight: "290px", overflowY: "auto" }}
           >
-            <div className="flex flex-wrap justify-between border border-white backdrop-blur-md items-start mb-8">
+            <div className="flex flex-wrap justify-between backdrop-blur-md items-start mb-8">
               {recommendations.map((user: any) =>
                 user.profilePublic === true ? (
                   <div
