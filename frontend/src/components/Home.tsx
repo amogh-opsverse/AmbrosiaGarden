@@ -523,8 +523,7 @@ const Home = () => {
                 >
                   <DALLEImageView
                     loggedInUser={username}
-                    fScreenState={setIsFullscreen}
-                    fullScreenBool={isFullscreen}
+                   
                   />
                 </div>
               </div>
