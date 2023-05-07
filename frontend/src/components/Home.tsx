@@ -507,14 +507,12 @@ const Home = () => {
               </div>
 
               <div
-                className={`image-container ${
-                  isFullscreen ? "fullscreen" : ""
-                }`}
+                className={"image-container  fullscreen"}
               >
                 <div
                   className={`absolute z-10 border backdrop-blur-md border-black w-full bg-blue-500 bg-opacity-25 p-6 rounded-lg shadow-lg transition-all duration-300 ${
                     collapsedImage ? "hidden" : "block"
-                  } ${isDarkMode ? "golden" : ""}  "high-opacity" max-w-md mx-auto`}
+                  } ${isDarkMode ? "golden" : ""}  high-opacity max-w-md mx-auto`}
                   style={{
                     maxWidth:  "95%",
                     width: "750px",
