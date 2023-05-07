@@ -361,12 +361,11 @@ const ProfileInfo: React.FC = () => {
                   "0px 2px 4px rgba(0, 0, 0, 0.5), 0px 4px 6px rgba(0, 0, 0, 0.25)",
               }}
             >
-              Profile Image:
+              Profile Image: (please do not upload a large image file)
             </label>
 
             <input
               type="file"
-              required
               onChange={handleImageUpload}
               className="mt-1 p-1 w-full border border-gray-300 rounded"
             />
