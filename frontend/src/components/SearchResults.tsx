@@ -215,7 +215,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
               className="flex flex-col h-full "
               style={{ maxHeight: "295px", overflowY: "auto" }}
             >
-              <div className="flex flex-wrap justify-between border border-white backdrop-blur-md items-start mb-8">
+              <div className="flex flex-wrap justify-between backdrop-blur-md items-start mb-8">
                 {/* {results.map((user) => ( */}
                 {displayResults.map((user: any) =>
                   user.profilePublic === true ? (
