@@ -445,6 +445,10 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+                <div className="chat-widget-container">
+                <div id="chat-widget-wrapper" />
+                <div className="glowing-overlay" />
+              </div>
             </div>
 
             <div
