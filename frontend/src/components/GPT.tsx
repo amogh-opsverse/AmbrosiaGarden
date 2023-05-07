@@ -348,6 +348,7 @@ const DALLEImageView: React.FC<DallEProps> = ({
                 fontFamily: "Roboto, sans-serif",
                 letterSpacing: "0.05em",
                 fontSize: "20px",
+                width: "200px",
                 textShadow:
                   "0px 2px 4px rgba(0, 0, 0, 0.5), 0px 4px 6px rgba(0, 0, 0, 0.25)",
               }}
