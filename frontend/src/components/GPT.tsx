@@ -426,9 +426,10 @@ const DALLEImageView: React.FC<DallEProps> = ({
           >
             {/* Render your collection view here */}
             {recipesLoaded ? (
-              <div className="image-grid mt-6 bg-blue-400 bg-opacity-25">
+              <div className="image-grid mt-6">
                 {collectionURLs.map((url: any, index: any) => (
                   <div
+                    className="bg-blue-400 bg-opacity-25"
                     style={{
                       border: "2px solid #e0e0e0",
                       display: "inline-block",
