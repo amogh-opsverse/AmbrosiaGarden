@@ -507,7 +507,7 @@ const Home = () => {
               </div>
 
               <div
-                className="image-container"
+                className="image-container fullscreen"
               >
                 <div
                   className={`absolute z-10 border backdrop-blur-md border-black w-full bg-blue-500 bg-opacity-25 p-6 rounded-lg shadow-lg transition-all duration-300 ${
