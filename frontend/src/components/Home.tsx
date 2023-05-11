@@ -42,6 +42,7 @@ interface User {
   savedRecipes: [any];
   collectionPublic: boolean;
   profilePublic: boolean;
+  dietPreference: string;
 }
 
 //gql mutation query for the list of users based on the search query
