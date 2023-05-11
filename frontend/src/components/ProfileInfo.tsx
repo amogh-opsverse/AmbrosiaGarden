@@ -161,9 +161,9 @@ const ProfileInfo: React.FC = () => {
       const file = e.target.files[0];
 
       const config = {
-        quality: 0.6,
-        maxWidth: 200,
-        maxHeight: 200,
+        quality: 0.7,
+        maxWidth: 800,
+        maxHeight: 800,
         autoRotate: true,
         debug: true,
       };
