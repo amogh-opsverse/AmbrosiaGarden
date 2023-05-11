@@ -62,6 +62,7 @@ const USER_DETAILS = gql`
     }
     profilePublic
     collectionPublic
+    dietPreference
   }
 `;
 
@@ -187,6 +188,7 @@ const Home = () => {
       collectionPublic: user.collectionPublic,
       savedRecipes: user.savedRecipes, //saving the recipes in the search results
       profilePublic: user.profilePublic,
+      dietPreference: user.dietPreference,
     }));
     console.log("searchResults structure", searchResults);
     //call the api to get the list of searched users
