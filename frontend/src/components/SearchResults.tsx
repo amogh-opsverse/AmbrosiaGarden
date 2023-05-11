@@ -31,6 +31,7 @@ interface User {
   savedRecipes: any;
   collectionPublic: boolean;
   profilePublic: boolean;
+  dietPreference: string;
 }
 
 const SAVE_IMAGE = gql`
@@ -337,6 +338,9 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                       <h3 style={h3Style}>Major: {selectedUser.major}</h3>
                       <h3 style={h3Style}>
                         Personality: {selectedUser.personality}
+                      </h3>
+                      <h3 style={h3Style}>
+                        Diet: {selectedUser.dietPreference}
                       </h3>
                     </div>
                     <hr className="flame border-t border-black mt-8" />
