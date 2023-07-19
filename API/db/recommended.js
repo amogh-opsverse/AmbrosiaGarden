@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const nanoid = require("nanoid");
 const { v4: uuidv4 } = require("uuid");
-//import { nanoid } from "nanoid";
+import { nanoid } from "nanoid";
 
 const RecommendedSchema = new mongoose.Schema({
   _id: String, //look into correct implementation of nanoid() to avoid stale id
